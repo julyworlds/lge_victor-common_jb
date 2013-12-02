@@ -23,26 +23,44 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
-
-USE_CAMERA_STUB := true
-
 TARGET_SPECIFIC_HEADER_PATH := device/lge/victor-common/include
 
-TARGET_NO_BOOTLOADER := true
-
 # Platform
+TARGET_BOOTLOADER_BOARD_NAME := victor
+TARGET_OTA_ASSERT_DEVICE := victor,lge730
 TARGET_BOARD_PLATFORM := msm7x30
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+TARGET_NO_INITLOGO := true
 
+
+# Architecture
 TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_LOWMEM := true
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+TARGET_CPU_VARIANT := cortex-a8
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
+
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+
+
+# Screens dimension
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
+
+
+# Kernel stuff
+BOARD_KERNEL_BASE := 0x00200000
+BOARD_KERNEL_PAGE_SIZE := 4096
+TARGET_KERNEL_SOURCE := kernel/lge/msm7x30/
+TARGET_KERNEL_CONFIG := lge730_defconfig
 
 # QCOM Hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -59,9 +77,6 @@ BOARD_USES_HWCOMPOSER := true
 TARGET_BOOTLOADER_BOARD_NAME := victor
 TARGET_BOOTANIMATION_USE_RGB565 := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-
-
-TARGET_KERNEL_SOURCE := kernel/lge/msm7x30
 
 # Wifi related defines
 BOARD_WLAN_DEVICE := bcm4330
@@ -104,12 +119,10 @@ BOARD_USES_LEGACY_CAMERA := true
 BOARD_NEEDS_MEMORYHEAPPMEM := true
 TARGET_DISABLE_ARM_PIE := true
 NO_UPDATE_PREVIEW := true
+USE_CAMERA_STUB := true
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=ttyMSM1 androidboot.hardware=victor
 BOARD_KERNEL_RECOVERY_CMDLINE := $(BOARD_KERNEL_CMDLINE)
-
-BOARD_KERNEL_BASE := 0x00200000
-BOARD_KERNEL_PAGE_SIZE := 4096
 
 # cat /proc/emmc
 #dev: size erasesize name
